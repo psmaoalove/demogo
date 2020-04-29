@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demogo
+  name: demogo
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: demogo
+  template:
+    metadata:
+      labels:
+        app: demogo
+    spec:
+      containers:
+        - image: swr.troila.com/demo/golang:v1
+          imagePullPolicy: IfNotPresent
+          name: my-app
+      restartPolicy: Always
